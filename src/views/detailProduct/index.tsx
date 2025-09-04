@@ -73,7 +73,6 @@ const DetailProduct = ({ product }: { product: productType }) => {
                         {new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR" }).format(product.price)}
                     </p>
                     <p className={styles.productDescription}>{product.description}</p>
-                    <button className={styles.buyButton}>Beli Sekarang</button>
                     {product.affiliate && (
                         <Link href={product.affiliate} className={styles.buyButton}>
                             Contact

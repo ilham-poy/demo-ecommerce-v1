@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { NextAuthOptions } from "next-auth";
 import { signIn } from "@/pages/utils/db/service";
-import { compare } from "bcrypt";
+import { compare } from "bcryptjs";
 
 
 const authOptions: NextAuthOptions = {

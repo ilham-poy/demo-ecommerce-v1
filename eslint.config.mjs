@@ -27,9 +27,7 @@
       "@next/next/no-img-element": "off",
     },
     },
-     eslint: {
-    ignoreDuringBuilds: true,
-  },
+    
   ];
 
   export default eslintConfig;

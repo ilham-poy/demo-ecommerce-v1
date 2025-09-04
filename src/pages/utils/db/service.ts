@@ -1,7 +1,7 @@
 import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
 import { getDoc } from "firebase/firestore";
 import app from "./firebase";
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import { put } from "@vercel/blob";
 
 
