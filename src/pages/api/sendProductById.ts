@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { put } from "@vercel/blob";
-import { sendProductById } from "../utils/db/service";
+import { sendProductById } from "../../utils/db/service";
 import busboy from "busboy";
 import { randomUUID } from "crypto";
 

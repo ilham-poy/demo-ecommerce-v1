@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getContent, sendContentById } from "../../utils/db/service";
+import { getContent, sendContentById } from "../../../utils/db/service";
 type Data = {
     status: boolean,
     statusCode: number,

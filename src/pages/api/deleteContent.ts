@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { deleteContentById } from "../utils/db/service";
+import { deleteContentById } from "../../utils/db/service";
 // type Data = {
 //     status: boolean,
 //     statusCode: number,

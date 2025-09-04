@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { deleteImageProduct, signUp } from "../utils/db/service";
+import { deleteImageProduct, signUp } from "../../utils/db/service";
 
 type Data = {
     status: boolean,
