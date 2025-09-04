@@ -1,0 +1,13 @@
+.notFound {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    color: aqua;
+}
+.text{
+    color: rgb(0, 0, 0);
+    background-color: aqua;
+    padding: 5px;
+}

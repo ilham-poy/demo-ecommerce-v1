@@ -1,0 +1,130 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 20px;
+    /* justify-content: center; */
+}
+
+.card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    height: fit-content;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+} 
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* kolom fleksibel */
+  grid-auto-rows: minmax(250px,450px);
+  gap: 0px 20px; 
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+
+.productImage {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.cardBody {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.cardTitle {
+    font-size: 1.5rem;
+    margin: 0 0 10px;
+    color: #333;
+}
+
+.cardActions {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.editButton, .deleteButton {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: background-color 0.2s;
+}
+
+.editButton {
+    background-color: #1dcd9f;
+}
+
+.editButton:hover {
+    background-color: #00976f;
+}
+
+.deleteButton {
+    background-color: #e74c3c;
+}
+
+.deleteButton:hover {
+    background-color: #c0392b;
+}
+
+/* Gaya untuk ikon (asumsi menggunakan Material Icons) */
+.material-icons {
+    font-size: 18px;
+}
+/* Container untuk status konten */
+.statusContainer {
+    display: inline-block;
+    /* padding: 0.3rem 0.8rem; */
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin: 0px 0px 10px 0px;
+}
+
+/* Gaya untuk status aktif (Hijau) */
+.statusActive {
+    /* background-color: #28a745;  */
+    color: rgb(255, 0, 0);
+}
+
+/* Gaya untuk status non-aktif (Abu-abu) */
+.statusNonActive {
+    /* background-color: #6c757d; */
+    color: rgb(0, 0, 0);
+}
+
+.createButton {
+  /* Style your button here */
+  padding: 10px 20px;
+  background-color: #1dcd9f; /* A green color for "Create" */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.createButton:hover {
+  background-color: #1fac3d; /* A darker green on hover */
+}
+
+.createButtonWrapper { /* ✅ Ini adalah div baru yang menampung tombol */
+  display: flex;
+  justify-content: flex-start; /* ✅ Mendorong konten ke ujung kanan */
+  padding: 10px; 
+}
