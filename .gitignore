@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+
+# Ignore specific product utils
+/pages/products/server.ts
+/pages/products/static.ts

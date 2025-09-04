@@ -18,12 +18,8 @@ const DetailProductPage = () => {
 
     return (
         <>
-            <h1>Ini Detail Product Page dan client side rendering</h1>
-            {/* client */}
             <DetailProduct product={isLoading ? [] : data.data} />
-            {/* server */}
-            {/* Sekarang aman untuk meneruskan product */}
-            {/* <DetailProduct product={product} /> */}
+
 
         </>
     )
