@@ -27,7 +27,11 @@ const Navbar = () => {
                     <>
                         {session ? (
                             <>
-                                <span className={styles.userInfo}><Link href='/profile'>Halo, {session.user?.fullname} </Link></span>
+                                <span className={styles.userInfo}>
+                                    <Link href="/profile">
+                                        Halo, {(session?.user as { fullname: string })?.fullname || "Pengguna"}
+                                    </Link>
+                                </span>
                                 <button onClick={() => signOut()} className={styles.authButton}>
                                     Sign Out
                                 </button>
