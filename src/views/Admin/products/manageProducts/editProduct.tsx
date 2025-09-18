@@ -13,7 +13,7 @@ type productType = {
     affiliate: string;
     stock: number;
     price: number;
-    status: boolean | string;
+    active: boolean | string;
     discount: number;
     discount_status: boolean;
     description: string;
@@ -36,7 +36,7 @@ export default function EditProduct({ dataContent, onCancel }: ManageContentsPro
         stock: dataContent?.stock,
         price: dataContent?.price,
         affiliate: dataContent?.affiliate,
-        active: dataContent?.status,
+        active: dataContent?.active,
         discount: dataContent?.discount,
         discount_status: dataContent?.discount_status,
         description: dataContent?.description,

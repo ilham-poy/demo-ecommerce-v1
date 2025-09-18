@@ -3,7 +3,7 @@ import { getDoc } from "firebase/firestore";
 import app from "./firebase";
 import bcrypt from 'bcryptjs'
 import { put } from "@vercel/blob";
-
+import { Timestamp } from "firebase/firestore";
 
 
 const firestore = getFirestore(app);
@@ -17,6 +17,15 @@ export async function retrieveData(collectionName: string) {
         id: doc.id,
         ...doc.data(),
     }));
+    // const data = snapshot.docs.map((doc) => {
+    //     const docData = doc.data();
+
+    //     return {
+    //         id: doc.id,
+    //         createdAt: docData.createdAt?.toDate?.() || new Date(),
+    //         ...docData,
+    //     };
+    // });
 
     return data;
 }
@@ -141,17 +150,18 @@ export async function createProduct(productData: {
     price: number;
     affiliate: string;
     IsAffiliate: boolean;
-    status: boolean;
+    active: boolean;
     discount: number;
     discount_status: boolean;
     description: string;
 }, callback: Function) {
-    // console.log(productData);
+    console.log(productData);
     try {
         const docRef = await addDoc(collection(firestore, "products"), productData);
         await updateDoc(doc(firestore, "products", docRef.id), {
             ...productData,
             id: docRef.id,
+            createdAt: Timestamp.now(),
         });
 
         callback({ status: true, message: "Create Content Success" });
@@ -177,7 +187,7 @@ export async function sendProductById(productData: {
 
 
     try {
-        // console.log(productData);
+        console.log(productData);
         const productRef = doc(firestore, 'products', productData.id);
         if (productData.image) {
             // Ambil Product dan image dari product
@@ -190,15 +200,19 @@ export async function sendProductById(productData: {
             const updatedImages = [...existingImages, ...newImages];
             await updateDoc(productRef, {
                 ...productData,
+                createdAt: Timestamp.now(),
                 image: updatedImages,
             }).then(() => {
-                callback({ status: true, messagge: 'Update Content Success' })
+                callback({ status: true, messagge: 'Update Product Success' })
             }).catch((error) => {
                 callback({ status: false, messagge: error })
             })
         } else {
-            await updateDoc(productRef, productData).then(() => {
-                callback({ status: true, messagge: 'Update Content Success' })
+            await updateDoc(productRef, {
+                ...productData,
+                createdAt: Timestamp.now(),
+            }).then(() => {
+                callback({ status: true, messagge: 'Update Product Success' })
             }).catch((error) => {
                 callback({ status: false, messagge: error })
             })

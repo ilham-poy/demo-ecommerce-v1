@@ -18,15 +18,24 @@ import HomeViews from "@/views/Home";
 
 export default function HomePage() {
     const [contents, setContents] = useState([]);
+    const [products, setProducts] = useState([]);
     useEffect(() => {
         fetch('/api/contents')
             .then((res) => res.json())
             .then((response) => setContents(response.data));
     }, [])
+    useEffect(() => {
+        fetch('/api/products/product')
+            .then((res) => res.json())
+            .then((response) => {
+                setProducts(response.data);
+            });
+    }, [])
+
 
     return (
         <>
-            <HomeViews contents={contents}></ HomeViews >
+            <HomeViews contents={contents} products={products}></ HomeViews >
         </>
     );
 }

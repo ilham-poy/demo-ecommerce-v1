@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import useSWR from 'swr';
-import DetailProduct from "@/views/detailProduct";
+import DetailProduct from "@/views/Products/detailProduct";
+import { useState } from "react";
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 type productType = {
     id: number,
@@ -19,7 +20,6 @@ const DetailProductPage = () => {
     return (
         <>
             <DetailProduct product={isLoading ? [] : data.data} />
-
 
         </>
     )

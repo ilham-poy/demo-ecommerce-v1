@@ -6,6 +6,16 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "rdjg9vt8xfmrbpm7.public.blob.vercel-storage.com",
+        pathname: "/products/**",
+      },
+    ],
+  },
+
 };
 
 export default nextConfig;

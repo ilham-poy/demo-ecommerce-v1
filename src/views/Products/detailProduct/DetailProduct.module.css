@@ -33,6 +33,29 @@
   }
 }
 
+.fadeIn {
+  animation: fadeIn 0.8s ease-in-out forwards;
+  opacity: 0;
+}
+
+.slideInLeft {
+  animation: slideInFromLeft 0.8s ease-in-out forwards;
+  opacity: 0;
+}
+
+.slideInRight {
+  animation: slideInFromRight 0.8s ease-in-out forwards;
+  opacity: 0;
+}
+
+/* Optional: delay classes */
+.delay200 { animation-delay: 0.2s; }
+.delay400 { animation-delay: 0.4s; }
+.delay600 { animation-delay: 0.6s; }
+.delay800 { animation-delay: 0.8s; }
+.delay1000 { animation-delay: 1s; }
+.delay1200 { animation-delay: 1.2s; }
+
 /* ProductDetail.module.css */
 
 .productDetailContainer {

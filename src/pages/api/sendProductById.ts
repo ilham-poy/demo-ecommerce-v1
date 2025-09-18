@@ -79,8 +79,8 @@ export default async function handler(
                 discount: Number(formData.discount),
                 price: Number(formData.price),
                 IsAffiliate: formData.IsAffiliate === 'true' ? true : false,
-                'discount_status': formData.discount_status === "true" ? true : false,
-                active: formData.status === "true" ? true : false,
+                'discount_status': formData['discount_status'] === "true" ? true : false,
+                active: formData.active === "true" ? true : false,
             };
             //Data form image kan array jadiin satu satu terus push
 
