@@ -2,6 +2,7 @@ import Link from 'next/link';
 import styles from './Products.module.css';
 import { useEffect } from 'react';
 import { Timestamp } from 'firebase/firestore';
+import Image from 'next/image';
 type productType = {
     id: number,
     name: string,
@@ -42,7 +43,7 @@ const Card = ({ products }: { products: productType[] }) => {
 
     return (
 
-        <div className="max-w-[1200px] mx-auto sm:px-4 sm:py-4 font-sans">
+        <div className="max-w-full mx-auto px-2 py-2 sm:px-4 sm:py-4 font-sans">
             <h1 className="text-center text-[1.5rem] sm:text-[2.5rem] text-pink-500 font-semibold mb-10">
                 Koleksi Produk
                 <span className='px-3  hover:text-pink-600 hover:underline'>
@@ -56,7 +57,7 @@ const Card = ({ products }: { products: productType[] }) => {
                     .map((product: productType) => (
 
                         <div
-                            className="bg-white rounded-xl shadow-md max-w-[300px] flex flex-col overflow-hidden transition duration-300 ease-in-out hover:-translate-y-2 hover:shadow-lg"
+                            className="bg-white rounded-xl shadow-md max-w-full flex flex-col overflow-hidden transition duration-300 ease-in-out hover:-translate-y-2 hover:shadow-lg"
                         >
                             <Link
                                 href={`/products/${product.id}`}
@@ -74,27 +75,27 @@ const Card = ({ products }: { products: productType[] }) => {
                                 <div className="px-3 py-3 text-start items-center flex-grow">
                                     {isNewProduct(product.createdAt)
                                         ? (
-                                            <span className="text-end text-base text-pink-500 font-bold hover:underline transition cursor-pointer">
+                                            <span className="text-end text-sm sm:text-base text-pink-500 font-bold hover:underline transition cursor-pointer">
                                                 New
                                             </span>
                                         )
-                                        : (<span className="text-transparent text-base  font-bold hover:underline transition cursor-pointer">
+                                        : (<span className="text-transparent text-sm sm:text-base  font-bold hover:underline transition cursor-pointer">
                                             New
                                         </span>)
                                     }
-                                    <h2 className="text-lg sm:text-[1.25rem] font-semibold text-gray-800 mb-2">
+                                    <h2 className="text-base sm:text-[1.25rem] font-semibold text-gray-800 mb-2">
                                         {product.name}
                                     </h2>
                                     <div className="p-1 box-border">
                                         {product.discount > 0 && product.discount_status === true ? (
                                             <>
-                                                <p className="text-xs sm:text-[.8rem] font-bold text-pink-400 line-through">
+                                                <p className="text-xs sm:text-[1rem] font-bold text-pink-400 line-through">
                                                     {new Intl.NumberFormat("id-ID", {
                                                         style: "currency",
                                                         currency: "IDR",
                                                     }).format(product.price)}
                                                 </p>
-                                                <p className="text-base sm:text-[1rem] font-bold text-pink-500 flex items-center gap-1">
+                                                <p className="text-xs sm:text-[1rem] font-bold text-pink-500 flex items-center gap-1">
                                                     {new Intl.NumberFormat("id-ID", {
                                                         style: "currency",
                                                         currency: "IDR",

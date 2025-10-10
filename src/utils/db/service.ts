@@ -1,4 +1,4 @@
-import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
+import { addDoc, deleteField, collection, deleteDoc, doc, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
 import { getDoc } from "firebase/firestore";
 import app from "./firebase";
 import bcrypt from 'bcryptjs'
@@ -90,7 +90,7 @@ export async function sendContentById(
     contentData:
         { id: string, active: boolean, 'hero-image': boolean, "image-link": string, image: string, name: string },
     callback: Function) {
-
+    console.log(contentData);
     // kalo si image kosong  atau undifined jangan delete image
     if (contentData.image === undefined) {
         const contentId = doc(firestore, 'content', contentData.id);
@@ -100,9 +100,14 @@ export async function sendContentById(
             callback({ status: false, messagge: error })
         })
     } else {
+        //delete image yang lama menggunakan image link di vercel blob
         await del(contentData['image-link']);
         const contentId = doc(firestore, 'content', contentData.id);
-        await updateDoc(contentId, contentData).then(() => {
+        await updateDoc(contentId, {
+            ...contentData,
+            // delete field nya di firebase
+            'image-link': deleteField()
+        }).then(() => {
             callback({ status: true, messagge: 'Update Content Success' })
         }).catch((error) => {
             callback({ status: false, messagge: error })
@@ -187,7 +192,7 @@ export async function sendProductById(productData: {
 
 
     try {
-        console.log(productData);
+        // console.log(productData);
         const productRef = doc(firestore, 'products', productData.id);
         if (productData.image) {
             // Ambil Product dan image dari product
@@ -225,7 +230,7 @@ export async function sendProductById(productData: {
 export async function deleteImageProduct(imageData: { image: string, id: string }, callback: Function) {
     try {
 
-        console.log(imageData);
+        // console.log(imageData);
 
 
         // Hapus image dari storage

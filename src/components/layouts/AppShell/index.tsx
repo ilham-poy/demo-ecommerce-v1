@@ -1,6 +1,6 @@
 import Navbar from "../Navbar"
 import { useRouter } from "next/router";
-
+import FooterComponent from "../Footer";
 
 type AppShellProps = {
     children: React.ReactNode;
@@ -16,10 +16,12 @@ const AppShell = (props: AppShellProps) => {
 
     return (
         <>
-            <main>
+
+            <main className="">
                 {!disableNavbar.includes(pathname) && <Navbar />}
                 {/* Yang Ditaro di children app shell masuk ke sini */}
                 {children}
+                <FooterComponent></FooterComponent>
             </main>
         </>
     )

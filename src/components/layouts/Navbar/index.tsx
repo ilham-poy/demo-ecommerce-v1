@@ -23,14 +23,16 @@ const Navbar = () => {
         <nav className="bg-pink-500 text-white px-6 py-4 shadow-md">
             <div className="flex justify-between items-center">
                 {/* Brand */}
-                <div className="text-xl font-bold">
-                    <Link href="/">Tuku Ning Endi Bae</Link>
+                <div className="flex items-center gap-3">
+                    <img src="/logo-nasywa.png" alt="Logo Nasywa" className="w-10 h-10" />
+                    <span className="text-xl font-semibold">Nasywa Art Space</span>
                 </div>
+
 
                 {/* Center Nav Links (Desktop) */}
                 <div className="hidden md:flex space-x-6">
                     <Link href="/" className="hover:underline underline-offset-6">Home</Link>
-                    <Link href="/about" className="hover:underline underline-offset-6">About Me</Link>
+                    <Link href="/about" className="hover:underline underline-offset-6">Get to Know Us</Link>
                     <Link href="/products" className="hover:underline underline-offset-6">Products</Link>
                     {session && (
                         <Link href="/admin" className="hover:underline underline-offset-6">Admin</Link>

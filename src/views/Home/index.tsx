@@ -1,24 +1,16 @@
 import Head from "next/head";
 import Image from "next/image";
-import { Geist, Geist_Mono } from "next/font/google";
 import styles from './Home.module.css';
 import { useEffect, useState } from "react";
 import Link from "next/link";
-const geistSans = Geist({
-    variable: "--font-geist-sans",
-    subsets: ["latin"],
-});
 
-const geistMono = Geist_Mono({
-    variable: "--font-geist-mono",
-    subsets: ["latin"],
-});
 
 type productType = {
     id: number,
     affiliate: string,
     name: string,
     price: number,
+    active: boolean,
     image: string,
     category: string
 }
@@ -40,7 +32,7 @@ export default function HomeViews(
         products: productType[];
     }) {
 
-    const heroContents = contents.filter((c) => c["hero-image"]);
+    const heroContents = contents.filter((c) => c["hero-image"] && c.active);
 
     const [currentIndex, setCurrentIndex] = useState(0);
     const [direction, setDirection] = useState(1); // 1 = maju, -1 = mundur
@@ -155,51 +147,48 @@ export default function HomeViews(
                             }}
                         >
 
-                            {randomProducts.map((product) => (
-                                <div
-                                    key={product.id}
-                                    className="min-w-[250px] sm:min-w-[300px] md:min-w-[320px] text-center border border-gray-300 rounded-lg p-4 bg-white transition duration-300 ease-in-out hover:shadow-md hover:-translate-y-1"
-                                >
-                                    <div className="relative w-full aspect-square mb-4">
-                                        <Image
-                                            src={product.image[0]}
-                                            alt={product.name}
-                                            fill
-                                            draggable={false}
-                                            className="w-full h-full object-cover rounded-lg pointer-events-none"
-                                        />
-                                    </div>
-                                    <div className="flex items-center justify-between gap-2 p-2 border-t border-pink-300">
-                                        <div className="text-left">
-                                            <Link href={`/products/${product.id}`} passHref>
-
-                                                <h3 className="text-xs sm:text-[.7rem] md:text-[.9rem] font-bold text-pink-400 mb-1">
-                                                    {product.name}
-                                                </h3>
-                                                <p className="text-xs sm:text-[.7rem] md:text-sm  font-semibold text-pink-400">
-                                                    {new Intl.NumberFormat("id-ID", {
-                                                        style: "currency",
-                                                        currency: "IDR",
-                                                    }).format(product.price)}
-                                                </p>
-                                            </Link>
+                            {randomProducts.filter((product: productType) => product.affiliate && product.active)
+                                .map((product) => (
+                                    <div
+                                        key={product.id}
+                                        className="min-w-[250px] sm:min-w-[300px] md:min-w-[320px] text-center border border-gray-300 rounded-lg p-4 bg-white transition duration-300 ease-in-out hover:shadow-md hover:-translate-y-1"
+                                    >
+                                        <div className="relative w-full aspect-square mb-4">
+                                            <Image
+                                                src={product.image[0]}
+                                                alt={product.name}
+                                                fill
+                                                draggable={false}
+                                                className="w-full h-full object-cover rounded-lg pointer-events-none"
+                                            />
                                         </div>
-                                        <Link href={product.affiliate}>
-                                            <button className="text-xs px-2.5 py-1 sm:text-[.7rem] sm:px-5 sm:py-2  md:text-[.9rem] md:px-5 md:py-2 xl:text-[1rem] border-pink-400 border-2 text-pink-400 rounded-md font-semibold hover:bg-pink-400 hover:text-white transition duration-300">
-                                                Beli Sekarang
-                                            </button>
-                                        </Link>
+                                        <div className="flex items-center justify-between gap-2 p-2 border-t border-pink-300">
+                                            <div className="text-left">
+                                                <Link href={`/products/${product.id}`} passHref>
 
+                                                    <h3 className="text-xs sm:text-[.7rem] md:text-[.9rem] font-bold text-pink-400 mb-1">
+                                                        {product.name}
+                                                    </h3>
+                                                    <p className="text-xs sm:text-[.7rem] md:text-sm  font-semibold text-pink-400">
+                                                        {new Intl.NumberFormat("id-ID", {
+                                                            style: "currency",
+                                                            currency: "IDR",
+                                                        }).format(product.price)}
+                                                    </p>
+                                                </Link>
+                                            </div>
+                                            <Link href={product.affiliate}>
+                                                <button className="text-xs px-2.5 py-1 sm:text-[.7rem] sm:px-5 sm:py-2  md:text-[.9rem] md:px-5 md:py-2 xl:text-[1rem] border-pink-400 border-2 text-pink-400 rounded-md font-semibold hover:bg-pink-400 hover:text-white transition duration-300">
+                                                    Beli Sekarang
+                                                </button>
+                                            </Link>
+
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
+                                ))}
                         </div>
                     </div>
-
                 </section>
-
-
-
 
                 <section className="shadow-lg text-center p-12 bg-pink-400 border-pink-400 border text-white rounded-lg mb-8 animate-fade-in">
                     <h2 className="text-2xl font-bold mb-4 ">Jangan Lewatkan Promo Spesial!</h2>
@@ -209,66 +198,14 @@ export default function HomeViews(
                     </a>
                 </section>
 
-                {/* <section className="mb-8 text-center text-pink-500 p-4 shadow-lg rounded-lg">
-                    <div className="grid grid-cols-3 grid-rows-2 gap-3 ">
-                        <div className="row-span-2  p-2 rounded-lg shadow flex items-center justify-center">
-                            <img
-                                src={safe(0, 0)}
-                                alt={products[0]?.name || 'Product Image'}
-                                className="w-full h-[60vh] object-cover rounded-md pointer-events-none"
-                            />
-
-                        </div>
-
-                        <div className=" p-2 rounded-lg shadow flex items-center justify-center">
-                            <img
-                                src={safe(1, 0)}
-                                alt={products[1]?.name || 'Product Image'}
-                                className="w-full h-full max-h-60 object-cover rounded-md pointer-events-none"
-
-                            />
-                        </div>
-                        <div className=" p-2 rounded-lg shadow flex items-center justify-center">
-                            <img
-                                src={safe(2, 0)}
-                                alt={products[2]?.name || 'Product Image'}
-                                className="w-full h-full max-h-60 object-cover rounded-md pointer-events-none"
-
-                            />
-                        </div>
-
-                        <div className=" p-2 rounded-lg shadow flex items-center justify-center">
-                            <img
-                                src={safe(3, 0)}
-                                alt={products[3]?.name || 'Product Image'}
-                                className="w-full h-full max-h-60 object-cover rounded-md pointer-events-none"
-
-                            />
-                        </div>
-                        <div className=" p-2 rounded-lg shadow flex items-center justify-center">
-                            <img
-                                src={safe(0, 1)}
-                                alt={products[0]?.name || 'Product Image'}
-                                className="w-full h-full max-h-60 object-cover rounded-md pointer-events-none"
-                            />
-                        </div>
-                    </div>
-
-                </section> */}
-
-
                 <section className="text-center p-8 rounded-lg animate-fade-in shadow-lg">
                     <h2 className="text-xl font-bold mb-4 text-pink-500">Kenali Kami Lebih Dekat</h2>
                     <p className="leading-relaxed mb-6 text-pink-500">Kami menyediakan produk berkualitas tinggi dengan harga terjangkau untuk kebutuhan gaya hidup Anda.</p>
-                    <a href="/contact" className="inline-block px-6 py-3 bg-pink-600 text-white rounded-md font-bold hover:bg-pink-700 transition">
+                    <a href="/about" className="inline-block px-6 py-3 bg-pink-400 text-white rounded-md font-bold hover:bg-pink-700 transition">
                         Baca Selengkapnya
                     </a>
                 </section>
-
-
             </main >
-
-
         </>
     );
 }

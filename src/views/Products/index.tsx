@@ -33,9 +33,19 @@ export default function ProductViews({ promo }: ProductViewsProps) {
                 setProducts(response.data);
             });
     }, [])
+    useEffect(() => {
+        if (promo) {
+            setIsPromo(true);
+            setCategory((prev) => {
+                const updated = prev.includes('Promo') ? prev : [...prev, 'Promo'];
+                return updated;
+            });
+        }
+    }, [promo]);
 
 
     const filterCategory = (label: string) => {
+
         if (isPromo) {
             setIsPromo(false)
         }
@@ -75,7 +85,9 @@ export default function ProductViews({ promo }: ProductViewsProps) {
         }
 
         setProducts(filtered);
-    }, [category]);
+    }, [category, promo, allProducts]);
+
+
 
 
     const cariKata = () => {
@@ -86,16 +98,16 @@ export default function ProductViews({ promo }: ProductViewsProps) {
     }
 
     return (
-        <div className="min-h-screen flex flex-col justify-center items-center bg-white p-6 space-y-6">
+        <div className="min-h-screen flex flex-col justify-center items-center bg-white  space-y-6">
             {/* Search Section */}
-            <nav className="bg-white shadow-sm px-4 py-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <nav className="bg-white shadow-sm px-4 py-6 flex m-4 flex-col md:flex-row md:items-center md:justify-between gap-4">
                 {/* Kategori Filter */}
                 <div className="flex flex-wrap gap-4">
                     {/* Promo */}
                     <label className="flex items-center gap-2 px-4 py-2 border border-pink-500 rounded-md cursor-pointer transition hover:bg-pink-50">
                         <input
                             type="checkbox"
-                            checked={promo || category.includes('Promo')}
+                            checked={isPromo || category.includes('Promo')}
                             onChange={() => filterCategory('Promo')}
                             className="accent-pink-500 w-4 h-4"
                         />
