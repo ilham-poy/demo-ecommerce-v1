@@ -2,6 +2,7 @@ import { signIn, signOut } from 'next-auth/react';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import styles from './navbar.module.css'
 
 const Navbar = () => {
 
@@ -25,15 +26,17 @@ const Navbar = () => {
                 {/* Brand */}
                 <div className="flex items-center gap-3">
                     <img src="/logo-nasywa.png" alt="Logo Nasywa" className="w-10 h-10" />
-                    <span className="text-xl font-semibold">Nasywa Art Space</span>
+                    <span className={`text-xl font-semibold ${styles.brand}`}>Nasywa Art Space</span>
                 </div>
 
 
                 {/* Center Nav Links (Desktop) */}
                 <div className="hidden md:flex space-x-6">
                     <Link href="/" className="hover:underline underline-offset-6">Home</Link>
-                    <Link href="/about" className="hover:underline underline-offset-6">Get to Know Us</Link>
                     <Link href="/products" className="hover:underline underline-offset-6">Products</Link>
+                    <Link href="/contact" className="hover:underline underline-offset-6">Contact</Link>
+                    <Link href="/about" className="hover:underline underline-offset-6">Get to Know Us</Link>
+
                     {session && (
                         <Link href="/admin" className="hover:underline underline-offset-6">Admin</Link>
                     )}
@@ -80,8 +83,9 @@ const Navbar = () => {
             {menuOpen && (
                 <div className="absolute right-6 top-16 bg-pink-500 text-white rounded shadow-md p-4 space-y-2 z-50 w-max text-center">
                     <Link href="/" className="block hover:underline underline-offset-6">Home</Link>
-                    <Link href="/contact" className="block hover:underline underline-offset-6">Contact</Link>
                     <Link href="/products" className="block hover:underline underline-offset-6">Products</Link>
+                    <Link href="/contact" className="block hover:underline underline-offset-6">Contact</Link>
+                    <Link href="/about" className="block hover:underline underline-offset-6">Get to Know</Link>
                     {session && (
                         <Link href="/admin" className="block hover:underline underline-offset-6">Admin</Link>
                     )}

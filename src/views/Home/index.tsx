@@ -80,7 +80,7 @@ export default function HomeViews(
     return (
         <>
             <Head>
-                <title>Nasywa ArtSpace</title>
+                <title>Nasywa Art Space</title>
                 <meta name="description" content="Selamat datang di toko online kami!" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />

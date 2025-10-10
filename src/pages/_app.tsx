@@ -7,12 +7,11 @@ import Head from "next/head";
 export default function App({ Component, pageProps: { session, pageProps } }: AppProps) {
   return (
     <SessionProvider session={session}>
-
+      <Head>
+        <link rel="icon" href="/logo-nasywa.png" />
+        <title>Nasywa Art Space</title>
+      </Head>
       <AppShell>
-        <Head>
-          <title>Nasywa Art Space</title>
-          <link rel="icon" href="/logo-nasywa.png" />
-        </Head>
         <Component {...pageProps} />
       </AppShell>
     </SessionProvider>
