@@ -49,8 +49,8 @@ export default function EditProduct({ dataContent, onCancel }: ManageContentsPro
         const newFiles = Array.from(files);
         const combinedFiles = [...formData.image, ...newFiles];
 
-        if (combinedFiles.length > 5) {
-            alert("Maksimal 5 gambar saja.");
+        if (combinedFiles.length > 1) {
+            alert("Maksimal 1 gambar saja.");
             e.target.value = ""; // reset input
             return;
         }
@@ -422,7 +422,35 @@ export default function EditProduct({ dataContent, onCancel }: ManageContentsPro
                 </label>
 
                 {/* Upload Gambar */}
-                <div className="col-span-1 sm:col-span-2">
+                {/* <div className="col-span-1 sm:col-span-2">
+                    <label htmlFor="image" className="flex flex-col font-medium text-gray-700">
+                        Upload Gambar:
+                        <div className="flex items-center justify-between border border-green-500 rounded-md mt-2 hover:shadow-md hover:shadow-green-300">
+                            <label htmlFor="image" className="w-2/5 bg-green-500 text-white text-center py-2 font-bold cursor-pointer">
+                                Pilih Gambar
+                            </label>
+                            <input
+                                name="image"
+                                type="file"
+                                id="image"
+                                multiple
+                                accept="image/*"
+                                className="sr-only"
+                                onChange={handleFileChange}
+                            />
+                            {formData.image.length > 0 && (
+                                <div className="flex flex-col gap-1 px-3 py-2">
+                                    {formData.image.map((file, index) => (
+                                        <span key={index} className="text-sm italic text-gray-800 bg-gray-100 px-2 py-1 rounded-md truncate">
+                                            {file.name}
+                                        </span>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    </label>
+                </div> */}
+                <div className="sm:col-span-2">
                     <label htmlFor="image" className="flex flex-col font-medium text-gray-700">
                         Upload Gambar:
                         <div className="flex items-center justify-between border border-green-500 rounded-md mt-2 hover:shadow-md hover:shadow-green-300">

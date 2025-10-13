@@ -160,7 +160,7 @@ export async function createProduct(productData: {
     discount_status: boolean;
     description: string;
 }, callback: Function) {
-    console.log(productData);
+    // console.log(productData);
     try {
         const docRef = await addDoc(collection(firestore, "products"), productData);
         await updateDoc(doc(firestore, "products", docRef.id), {
@@ -278,5 +278,50 @@ export async function deleteProductById(productDelete: { id: string }, callback:
         // }
     } catch (error: any) {
         callback({ status: false, message: error.message });
+    }
+}
+
+
+export async function contactMessage(contactMessage: {
+    name: string;
+    email: string;
+    message: string;
+    quantity: number;
+    image: File[];
+
+}) {
+    try {
+        const docRef = await addDoc(collection(firestore, "message"), contactMessage);
+        await updateDoc(doc(firestore, "message", docRef.id), {
+            ...contactMessage,
+            id: docRef.id,
+            createdAt: Timestamp.now(),
+        });
+        const docSnap = await getDoc(doc(firestore, "message", docRef.id));
+
+        // Konversi ke JSON (dari Firestore DocumentSnapshot)
+        const data = docSnap.exists() ? docSnap.data() : null;
+
+        const jsonData = data
+            ? {
+                ...data,
+                createdAt: data.createdAt?.toDate
+                    ? data.createdAt.toDate().toISOString()
+                    : data.createdAt,
+            }
+            : null;
+
+        return JSON.parse(
+            JSON.stringify({
+                status: true,
+                message: "Create Message Success",
+                data: jsonData,
+            })
+        );
+    } catch (error: any) {
+        return {
+            status: true,
+            message: "Create Message Success"
+        };
     }
 }

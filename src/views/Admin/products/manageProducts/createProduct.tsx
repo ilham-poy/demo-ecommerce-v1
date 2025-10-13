@@ -47,8 +47,8 @@ export default function CreateProduct({ onCancel }: { onCancel: () => void }) {
         const newFiles = Array.from(files);
         const combinedFiles = [...formData.image, ...newFiles];
 
-        if (combinedFiles.length > 5) {
-            alert("Maksimal 5 gambar saja.");
+        if (combinedFiles.length > 1) {
+            alert("Maksimal 1 gambar saja.");
             e.target.value = ""; // reset input
             return;
         }
