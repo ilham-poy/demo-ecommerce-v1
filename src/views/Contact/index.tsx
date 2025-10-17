@@ -90,7 +90,7 @@ export default function ContactViews() {
 
             const data = await response.json();
             if (data) {
-
+                console.log(data);
                 setResponses(data);
                 setSendProcess(true);
                 setTimeout(() => {

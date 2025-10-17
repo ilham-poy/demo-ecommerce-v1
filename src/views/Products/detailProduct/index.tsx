@@ -145,15 +145,25 @@ const DetailProduct = ({ product }: { product: productType }) => {
                         <p className={`text-base text-gray-700 leading-relaxed mb-8 ${styles.fadeIn} ${styles.delay1000}`}>
                             {product.description}
                         </p>
-
-                        {product.affiliate && product.active && (
+                        <div className="flex gap-4">
+                            {product.affiliate && product.active && (
+                                <Link
+                                    href={product.affiliate}
+                                    className={`px-6 py-3 bg-pink-400 text-white sm:text-sm text-base font-bold rounded-lg hover:bg-pink-500 transition duration-300 self-start ${styles.fadeIn} ${styles.delay1200}`}
+                                >
+                                    Beli Via Market Place
+                                </Link>
+                            )}
                             <Link
-                                href={product.affiliate}
-                                className={`px-6 py-3 bg-pink-400 text-white text-lg font-bold rounded-lg hover:bg-pink-500 transition duration-300 self-start ${styles.fadeIn} ${styles.delay1200}`}
+                                href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}?text=Halloo saya mau tanya tanya tentang barang ini`}
+
+                                className={`px-6 py-3 bg-pink-400 text-white sm:text-sm text-base font-bold rounded-lg hover:bg-pink-500 transition duration-300 self-start ${styles.fadeIn} ${styles.delay1200}`}
                             >
-                                Beli Sekarang
+                                Chat Via Whatsapp
                             </Link>
-                        )}
+                        </div>
+
+
                     </div>
                 </div>
             </div >
@@ -161,7 +171,7 @@ const DetailProduct = ({ product }: { product: productType }) => {
             <div className="w-full max-w-5xl">
                 <Card products={products} />
             </div>
-        </div>
+        </div >
 
     )
 }
