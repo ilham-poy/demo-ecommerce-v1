@@ -47,6 +47,8 @@ export default async function handler(
                                 const { url } = await put(`messages/${uniqueName}`, buffer, {
                                     access: "public",
                                     contentType: mimeType,
+                                    ...({ headers: { "x-content-length": buffer.length.toString() } } as any),
+
                                 });
                                 if (!Array.isArray(data.image)) {
                                     data.image = [];

@@ -78,7 +78,7 @@ export default function ContactViews() {
                 body: formData,
             });
             const datas = await results.json();
-            const api = process.env.NEXT_PUBLIC_BACKEND_SERVICES_EMAIL;
+            const api = process.env.NEXT_PUBLIC_BACKEND_SERVICES_EMAIL_STAGING;
             const response = await fetch(`${api}`, {
                 method: 'POST',
                 headers: {
