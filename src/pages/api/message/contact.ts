@@ -39,8 +39,15 @@ export default async function handler(
 
                     file.on("end", () => {
                         const buffer = Buffer.concat(chunks);
-                        // if (buffer.length === 0) return;
-                        // push promise upload ke array
+
+                        // Skip upload kalau tidak ada isi file
+                        if (buffer.length === 0) return;
+
+                        // Pastikan data.image selalu array
+                        if (!Array.isArray(data.image)) {
+                            data.image = [];
+                        }
+
                         uploads.push(
                             (async () => {
                                 const uniqueName = `${Date.now()}-${randomUUID()}-${filename}`;
@@ -48,17 +55,13 @@ export default async function handler(
                                     access: "public",
                                     contentType: mimeType,
                                     ...({ headers: { "x-content-length": buffer.length.toString() } } as any),
-
                                 });
-                                if (!Array.isArray(data.image)) {
-                                    data.image = [];
-                                }
                                 data.image.push(url);
                             })()
                         );
                     });
-
                 });
+
 
                 bb.on("field", (name: any, val: any) => {
                     data[name] = val;
@@ -68,13 +71,23 @@ export default async function handler(
 
                 bb.on("close", async () => {
                     try {
-                        await Promise.all(uploads);
+                        // Jalankan hanya jika ada upload
+                        if (uploads.length > 0) {
+                            await Promise.all(uploads);
+                        }
+
+                        // Kalau user tidak upload gambar, set default image = []
+                        if (!Array.isArray(data.image)) {
+                            data.image = [];
+                        }
+
                         resolve(data);
                     } catch (err) {
-                        console.error("Upload error:", err); // Tambahkan ini
+                        console.error("Upload error:", err);
                         reject(err);
                     }
                 });
+
 
                 req.pipe(bb);
             });

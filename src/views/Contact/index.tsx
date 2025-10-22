@@ -70,15 +70,14 @@ export default function ContactViews() {
     const handleSubmit = async (event: any) => {
 
         event.preventDefault();
-
+        const formData = new FormData(event.target);
         try {
-            const formData = new FormData(event.target);
+
             const results = await fetch('/api/message/contact', {
                 method: "POST",
                 body: formData,
             });
             const datas = await results.json();
-            console.log(datas);
             const api = process.env.NEXT_PUBLIC_BACKEND_SERVICES_EMAIL;
             const response = await fetch(`${api}`, {
                 method: 'POST',
@@ -178,11 +177,12 @@ export default function ContactViews() {
                 <div>
                     <label htmlFor="quantity" className="block text-sm font-medium mb-1 text-pink-500">Jumlah Pemesanan</label>
                     <input
-                        type="quantity"
+                        type="number"
                         onChange={handleChange}
 
                         id="quantity"
                         name="quantity"
+
                         placeholder="Jumlah Pemesanan"
                         className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500"
                         required
