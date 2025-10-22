@@ -97,9 +97,7 @@ export default async function handler(
             };
 
             // simpan ke Firestore
-            console.log("Parsed data:", parsedData);
             const result = await contactMessage(parsedData);
-            console.log("Firestore result:", result);
 
             // const result = await contactMessage(parsedData);
             if (result?.status) {
