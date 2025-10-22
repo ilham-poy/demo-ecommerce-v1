@@ -68,9 +68,10 @@ export default async function handler(
 
                 bb.on("close", async () => {
                     try {
-                        await Promise.all(uploads); // tunggu semua upload selesai
+                        await Promise.all(uploads);
                         resolve(data);
                     } catch (err) {
+                        console.error("Upload error:", err); // Tambahkan ini
                         reject(err);
                     }
                 });
@@ -83,7 +84,11 @@ export default async function handler(
             };
 
             // simpan ke Firestore
+            console.log("Parsed data:", parsedData);
             const result = await contactMessage(parsedData);
+            console.log("Firestore result:", result);
+
+            // const result = await contactMessage(parsedData);
             if (result?.status) {
                 res.status(200).json({
                     status: true,
